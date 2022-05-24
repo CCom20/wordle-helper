@@ -135,7 +135,7 @@ def home():
         else:
             next
 
-        return render_template("index.html", code=302, result=top_words)
+        return render_template("index.html", result=top_words, random_phrase=random_phrase)
 
     return render_template("index.html", random_phrase=random_phrase, result='')
 
