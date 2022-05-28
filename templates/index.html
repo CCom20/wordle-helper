@@ -33,6 +33,7 @@
         </div>
         <div>
             <table id="data" class="table table-striped">
+                <caption>"Score" is a relative metric based on how many words are left. No word has the same score throughout the guessing process.</caption>
                 <thead>
                 <tr>
                     <th>Word</th>
@@ -43,7 +44,7 @@
                 {% for r in result %}
                     <tr>
                     <td>{{ r }}</td>
-                    <td>{{ result[r] }}</td>
+                    <td>{{ result[r]|string }}</td>
                     </tr>
                 {% endfor %}
                 </tbody>
