@@ -1,7 +1,6 @@
-from flask import Flask, redirect, url_for, request, render_template, session
-from helper import reload_available_words
+from flask import Flask, redirect, request, render_template, session
+from helper import reload_available_words, words_list
 # from config import secret_key
-import pandas as pd 
 import random
 
 app = Flask(__name__)
@@ -13,7 +12,7 @@ random_phrase = random.choice(['From Wordle Dud to Wordle Stud', 'From Wordle Ze
 'From Wordle Flop to Wordle Top', 'From Wordle “Oh Crap!” to Wordle “Oh Snap!”'])
 
 ## HOME PAGE
-@app.route("/wordle-optimizer", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def home():
 
     # IF THE SESSION IS SET, WE USE THE SESSION DATA
@@ -26,16 +25,8 @@ def home():
             right_spots = request.form["right_spots"]
 
             if session['loaded'] == 0:
-                new_list_df = pd.read_csv("data\words.csv", sep=" ", header=None)
-                new_list_df.rename(columns={0: 'W'}, inplace=True)
 
-                available_word_list = []
-
-                for i, r in new_list_df[new_list_df['W'].str.len() == 5].iterrows():
-
-                    word = r['W']
-
-                    available_word_list.append(word)
+                available_word_list = words_list
 
                 session['loaded'] = 1
 
@@ -56,7 +47,7 @@ def firstload():
     session['guess_counter'] = 0
     session['loaded'] = 0
 
-    return redirect("/wordle-optimizer")
+    return redirect("/")
 
 
 if __name__ == "__main__":
