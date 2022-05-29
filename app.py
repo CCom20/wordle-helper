@@ -13,7 +13,7 @@ random_phrase = random.choice(['From Wordle Dud to Wordle Stud', 'From Wordle Ze
 'From Wordle Flop to Wordle Top', 'From Wordle “Oh Crap!” to Wordle “Oh Snap!”'])
 
 ## HOME PAGE
-@app.route("/", methods=["GET", "POST"])
+@app.route("/wordle-optimizer", methods=["GET", "POST"])
 def home():
 
     # IF THE SESSION IS SET, WE USE THE SESSION DATA
@@ -56,7 +56,7 @@ def firstload():
     session['guess_counter'] = 0
     session['loaded'] = 0
 
-    return redirect("/")
+    return redirect("/wordle-optimizer")
 
 
 if __name__ == "__main__":
