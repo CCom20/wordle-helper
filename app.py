@@ -1,10 +1,10 @@
 from flask import Flask, redirect, request, render_template, session
 from helper import reload_available_words, words_list
-# from config import secret_key
+from config import secret_key
 import random
 
 app = Flask(__name__)
-# app.secret_key = secret_key
+app.secret_key = secret_key
 
 
 random_phrase = random.choice(['From Wordle Dud to Wordle Stud', 'From Wordle Zero to Wordle Hero', 
@@ -39,15 +39,20 @@ def home():
             return render_template("index.html", result=session['Words'], random_phrase=random_phrase)
 
     else:
-        return redirect("/load")
+        session['guess_counter'] = 0
+        session['loaded'] = 0
 
-@app.route("/load", methods=["GET"])
-def firstload():
+        return redirect("/")
+        
+    return render_template("index.html", result='', random_phrase=random_phrase)
 
-    session['guess_counter'] = 0
-    session['loaded'] = 0
+# @app.route("/load", methods=["GET"])
+# def firstload():
 
-    return redirect("/")
+#     session['guess_counter'] = 0
+#     session['loaded'] = 0
+
+#     return redirect("/")
 
 
 if __name__ == "__main__":
