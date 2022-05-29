@@ -5,7 +5,7 @@ import pandas as pd
 import random
 
 app = Flask(__name__)
-app.secret_key = secret_key
+# app.secret_key = secret_key
 
 
 random_phrase = random.choice(['From Wordle Dud to Wordle Stud', 'From Wordle Zero to Wordle Hero', 
