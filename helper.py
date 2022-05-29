@@ -1,6 +1,3 @@
-import pandas as pd 
-import csv
-
 def reload_available_words(guess, wrong_letters, right_spots, available_word_list):
         
     available_word_list = available_word_list

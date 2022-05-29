@@ -1,14 +1,10 @@
 from flask import Flask, redirect, url_for, request, render_template, session
 from helper import reload_available_words
-from flask_compress import Compress
-import csv
 import pandas as pd 
 import random
-import os
 
 app = Flask(__name__)
-Compress(app)
-app.secret_key = os.urandom(256)
+app.secret_key = random.seed(a=16)
 
 
 random_phrase = random.choice(['From Wordle Dud to Wordle Stud', 'From Wordle Zero to Wordle Hero', 
