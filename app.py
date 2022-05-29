@@ -1,6 +1,6 @@
 from flask import Flask, redirect, url_for, request, render_template, session
 from helper import reload_available_words
-from config import secret_key
+# from config import secret_key
 import pandas as pd 
 import random
 
@@ -48,9 +48,16 @@ def home():
             return render_template("index.html", result=session['Words'], random_phrase=random_phrase)
 
     else:
-        session['guess_counter'] = 0
-        session['loaded'] = 0
-        return render_template("index.html", result='', random_phrase=random_phrase)
+        return redirect("/load")
+
+@app.route("/load", methods=["GET"])
+def firstload():
+
+    session['guess_counter'] = 0
+    session['loaded'] = 0
+
+    return redirect("/")
+
 
 if __name__ == "__main__":
     session.init_app(app)
