@@ -50,7 +50,7 @@ def home():
     else:
         session['guess_counter'] = 0
         session['loaded'] = 0
-        return render_template("index.html", result='', random_phrase=random_phrase)
+        return redirect('/')
 
 if __name__ == "__main__":
     session.init_app(app)
