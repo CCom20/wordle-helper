@@ -2,9 +2,3 @@ Flask==1.1.2
 gunicorn==20.1.0
 Jinja2==2.11.2
 pandas==1.1.4
-psycopg2==2.8.6
-pyparsing==2.4.7
-pytz==2020.4
-PyYAML==5.4.1
-pyzmq==19.0.2
-win-inet-pton==1.1.0
