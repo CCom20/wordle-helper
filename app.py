@@ -1,10 +1,11 @@
 from flask import Flask, redirect, request, render_template, session
 from helper import reload_available_words, words_list
-from config import secret_key
+# from config import secret_key
+import os
 import random
 
 app = Flask(__name__)
-app.secret_key = secret_key
+app.secret_key = os.urandom(16)
 
 
 random_phrase = random.choice(['From Wordle Dud to Wordle Stud', 'From Wordle Zero to Wordle Hero', 
