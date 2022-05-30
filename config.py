@@ -1,0 +1,1 @@
+secret_key = '/fh%flask&wordle**app#2'
