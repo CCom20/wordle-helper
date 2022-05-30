@@ -38,11 +38,14 @@ def reload_available_words(guess, wrong_letters, right_spots, available_word_lis
 
     # Exclude all words containing the wrong letters
     for x in wrong_letters:
-        for w in available_word_list:
-            if x in list(w):
-                exclude_list.append(w)
-            else:
-                next
+        if x in right_spots:
+            next
+        else:
+            for w in available_word_list:
+                if x in list(w):
+                    exclude_list.append(w)
+                else:
+                    next
 
     # Exclude all words where letter is not in the right index
 
