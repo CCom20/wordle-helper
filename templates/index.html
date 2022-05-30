@@ -4,36 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Translator</title>
+    <title>Wordle Guess Optimizer</title>
 </head>
 <body>
     <div class="container">
-        <h1>Wordle Helper</h1>
+        <h1>Wordle Guess Optimizer</h1>
         <div class="p-3 bg-dark" style="color: white">{{ random_phrase }}</div>
         <div>
             <form method="POST">
-                <div class="form-group border bg-light">
-                    <div class="p-3">
+                <div class="form-group border bg-light gx-5">
+                    <div class="p-2">
                         <label for="guessField">What was your guess? </label>
                             <input type="text" id="guess" name="guessedWord"> 
                     </div>
-                    <div class="p-3">
+                    <div class="p-2">
                         <label for="wrongLettersField">Which letters are grey? </label>
                         <input type="text" id="wrongLetters" name="wrongLetters">
                     </div>
-                    <div class="p-3">
+                    <div class="p-2">
                         <label for="rightSpotsField">Which letters are green? Leave blank if none. </label>
                         <input type="text" id="right_spots" name="right_spots">
                     </div>
-                    <div class="p-3">
-                        <button type="submit" class="btn btn-success">Submit</button>
+                    <div class="container">
+                        <div class="row" style="padding-top: 10px; padding-bottom: 20px;">
+                            <div class="col-sm-4">
+                                <button type="submit" class="btn btn-success" style="font-weight: 600">Submit</button>
+                            </div>
+                            <div class="col-sm-4 offset-md-4">
+                                <button type="submit" class="btn btn-info" href="/reset" style="color: white; font-weight: 600;">Reset My Session</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>
         </div>
         <div>
+            
+        </div>
+        <div>
             <table id="data" class="table table-striped">
-                <caption>"Score" is a relative metric based on how many words are left. No word has the same score throughout the guessing process.</caption>
+                <caption>"Score" is a relative metric based on the words that are left. No word has the same score throughout the guessing process.</caption>
                 <thead>
                 <tr>
                     <th>Word</th>

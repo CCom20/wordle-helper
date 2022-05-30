@@ -55,6 +55,13 @@ def home():
 
 #     return redirect("/")
 
+@app.route("/reset")
+def reset():
+    session.clear()
+    session['guess_counter'] = 0
+    session['loaded'] = 0
+    redirect('/')
+
 
 if __name__ == "__main__":
     session.init_app(app)
