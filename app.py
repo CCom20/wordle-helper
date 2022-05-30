@@ -25,26 +25,23 @@ def home():
             right_spots = request.form["right_spots"]
 
             if session['loaded'] == 0:
-
+                session['loaded'] = 1
+        
                 available_word_list = words_list
 
-                session['loaded'] = 1
-
                 session['Words'] = reload_available_words(guess, wrong_letters, right_spots, available_word_list)
+                return render_template("index.html", result=session['Words'], random_phrase=random_phrase)
 
             else:
                 session['Words'] = reload_available_words(guess, wrong_letters, right_spots, session['Words'])
-
-            
-            return render_template("index.html", result=session['Words'], random_phrase=random_phrase)
-
+                return render_template("index.html", result=session['Words'], random_phrase=random_phrase)
+        else:
+            return render_template("index.html", result='', random_phrase=random_phrase)
     else:
         session['guess_counter'] = 0
         session['loaded'] = 0
 
         return redirect("/")
-
-    return render_template("index.html", result='', random_phrase=random_phrase)
 
 @app.route("/reset")
 def reset():
