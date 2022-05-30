@@ -96,12 +96,11 @@ def reload_available_words(guess, wrong_letters, right_spots, available_word_lis
 
     # Reset top words list based on no repeats and order by their expected information value
     suggested_words = [{x: top_words[x] for x in top_words if x not in top_list_exlude}]
-    top_words = {k: v for k, v in sorted(suggested_words[0].items(), key=lambda item: item[1], reverse=True)}
 
     if len(suggested_words) < 15:
         top_words = {k: v for k, v in sorted(top_words.items(), key=lambda item: item[1], reverse=True)}
     else:
-        top_words = suggested_words 
+        top_words = {k: v for k, v in sorted(suggested_words[0].items(), key=lambda item: item[1], reverse=True)}
         
     return top_words
 
