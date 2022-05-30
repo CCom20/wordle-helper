@@ -47,14 +47,6 @@ def home():
 
     return render_template("index.html", result='', random_phrase=random_phrase)
 
-# @app.route("/load", methods=["GET"])
-# def firstload():
-
-#     session['guess_counter'] = 0
-#     session['loaded'] = 0
-
-#     return redirect("/")
-
 @app.route("/reset")
 def reset():
     session.clear()
