@@ -76,11 +76,14 @@ def reload_available_words(guess, wrong_letters, right_spots, available_word_lis
     top_words = {}
 
     for w in available_word_list:
+
         word_weight = 0
 
         for l in w:
-
-            word_weight += letter_count_dictionary[l]
+            if w.count(l) > 1:
+                word_weight += letter_count_dictionary[l] 
+            else: 
+                word_weight += (letter_count_dictionary[l]*2)
 
         if w not in top_words:
             word = w

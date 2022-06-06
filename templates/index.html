@@ -7,40 +7,68 @@
     <title>Wordle Guess Optimizer</title>
 </head>
 <body>
+    <!-- PAGE CONTAINER -->
     <div class="container">
-        <h1>Wordle Guess Optimizer</h1>
+
+        <!-- H1 -->
+        <div class="p-3">
+            <h1>Wordle Guess Optimizer</h1>
+        </div>
+
+        <!-- RANDOM PHRASE GENERATOR -->
         <div class="p-3 bg-dark" style="color: white">{{ random_phrase }}</div>
-        <div>
-            <form method="POST">
-                <div class="form-group border bg-light gx-5">
-                    <div class="p-2">
-                        <label for="guessField">What was your guess? </label>
+
+        <!-- FORM AND GUESS TABLES -->
+        <div class="row">
+
+            <!-- FORM -->
+            <div class = "col">
+                <form method="POST">
+                    <div class="form-group bg-light">
+                        <div class="p-1 form-label">
+                            <label for="guessField" class="form-label">What was your guess? </label>
                             <input type="text" id="guess" name="guessedWord"> 
-                    </div>
-                    <div class="p-2">
-                        <label for="wrongLettersField">Which letters are grey? </label>
-                        <input type="text" id="wrongLetters" name="wrongLetters">
-                    </div>
-                    <div class="p-2">
-                        <label for="rightSpotsField">Which letters are green? Leave blank if none. </label>
-                        <input type="text" id="right_spots" name="right_spots">
-                    </div>
-                    <div class="container">
-                        <div class="row" style="padding-top: 10px; padding-bottom: 20px;">
-                            <div class="col-sm-4">
-                                <button type="submit" class="btn btn-success" style="font-weight: 600">Submit</button>
-                            </div>
-                            <div class="col-sm-4 offset-md-4">
-                                <button type="submit" class="btn btn-info" href="/reset" style="color: white; font-weight: 600;">Reset My Session</button>
-                            </div>
+                        </div>
+                        <div class="mb-3 p-1">
+                            <label for="wrongLettersField" class="form-label">Which letters are grey? </label>
+                            <input type="text" id="wrongLetters" name="wrongLetters">
+                        </div>
+                        <div class="mb-3 p-1">
+                            <label for="rightSpotsField" class="form-label">Which letters are green? Leave blank if none. </label>
+                            <input type="text" id="right_spots" name="right_spots">
+                        </div>
+                        <div class = "mb-3 p-1">
+                            <button type="submit" class="btn btn-success" style="font-weight: 600">Submit</button>
                         </div>
                     </div>
+                </form>
+            </div>
+
+            <!-- GUESS TABLE -->
+            <div class = "col">
+                <div>
+                    <table id="data" class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Guesses</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for g in guess %}
+                            <tr>
+                            <td>{{ g }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-            </form>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-warning"><a  href="{{ url_for('reset') }}" class="text-decoration-none" style="color: black; font-weight: 600;">Clear</a></button>
+                </div>
+            </div>
         </div>
-        <div>
-            
-        </div>
+
+        <!-- WORD OPTIMIAZTION TABLE -->
         <div>
             <table id="data" class="table table-striped">
                 <caption>"Score" is a relative metric based on the words that are left. No word has the same score throughout the guessing process.</caption>

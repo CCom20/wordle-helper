@@ -24,31 +24,27 @@ def home():
             wrong_letters = request.form["wrongLetters"]
             right_spots = request.form["right_spots"]
 
-            if session['loaded'] == 0:
-                session['loaded'] = 1
+            session['Guesses'].append(guess)
         
-                available_word_list = words_list
+            available_word_list = words_list
 
-                session['Words'] = reload_available_words(guess, wrong_letters, right_spots, available_word_list)
-                return render_template("index.html", result=session['Words'], random_phrase=random_phrase)
-
-            else:
-                session['Words'] = reload_available_words(guess, wrong_letters, right_spots, session['Words'])
-                return render_template("index.html", result=session['Words'], random_phrase=random_phrase)
+            session['Words'] = reload_available_words(guess, wrong_letters, right_spots, available_word_list)
+            return render_template("index.html", result=session['Words'], random_phrase=random_phrase, guess=session['Guesses'])
         else:
-            return render_template("index.html", result='', random_phrase=random_phrase)
+            try:
+                return render_template("index.html", result=session['Words'], random_phrase=random_phrase, guess=session['Guesses'])
+            except:
+                return render_template("index.html", result='', random_phrase=random_phrase, guess='')
     else:
-        session['guess_counter'] = 0
-        session['loaded'] = 0
-
-        return redirect("/")
+        return redirect("/reset")
 
 @app.route("/reset")
 def reset():
     session.clear()
     session['guess_counter'] = 0
     session['loaded'] = 0
-    redirect('/')
+    session['Guesses'] = []
+    return redirect('/')
 
 
 if __name__ == "__main__":
