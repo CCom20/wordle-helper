@@ -18,43 +18,53 @@ def home():
     # IF THE SESSION IS SET, WE USE THE SESSION DATA
     if 'loaded' in session:
 
-        if request.method == 'POST':
+        # IF THE FIRST SESSION, LOAD DATA
+        if session['loaded'] == 0:
 
-            if session['loaded'] == 0:
-                
-                session['loaded'] = 1
+            session['loaded'] = 1
+
+            if request.method == 'POST':
 
                 guess = request.form["guessedWord"]
                 wrong_letters = request.form["wrongLetters"]
                 right_spots = request.form["right_spots"]
 
-                session['Guesses'].append(guess)
+                session['guessedWordsList'].append(guess)
+
+                session['wordsLeft'] = reload_available_words(session['guessedWordsList'], wrong_letters, right_spots, words_list)
+
+                return render_template("index.html", result=session['wordsLeft'], random_phrase=random_phrase, guess=session['guessedWordsList'])
+            
+            else:
+
+                return render_template("index.html", result='', random_phrase=random_phrase, guess='')
+
+        else:
+
+            if request.method == 'POST':
+
+                guess = request.form["guessedWord"]
+                wrong_letters = request.form["wrongLetters"]
+                right_spots = request.form["right_spots"]
+
+                session['guessedWordsList'].append(guess)
 
                 available_word_list = words_list
                 session['Words'] = reload_available_words(guess, wrong_letters, right_spots, available_word_list)
 
-                return render_template("index.html", result=session['Words'], random_phrase=random_phrase, guess=session['Guesses'])
+                return render_template("index.html", result=session['Words'], random_phrase=random_phrase, guess=session['guessedWordsList'])
 
             else:
-                guess = request.form["guessedWord"]
-                wrong_letters = request.form["wrongLetters"]
-                right_spots = request.form["right_spots"]
 
-                session['Guesses'].append(guess)
-                session['Words'] = reload_available_words(guess, wrong_letters, right_spots, available_word_list)
-
-                return render_template("index.html", result=session['Words'], random_phrase=random_phrase, guess=session['Guesses'])           
-        else:
-            return render_template("index.html", result='', random_phrase=random_phrase, guess='')
+                return render_template("index.html", result=session['Words'], random_phrase=random_phrase, guess=session['guessedWordsList'])           
     else:
-        return redirect("/reset")
+        session['loaded'] = 0
+        session['guessedWordsList'] = []
+        return redirect("/")
 
 @app.route("/reset")
 def reset():
     session.clear()
-    session['guess_counter'] = 0
-    session['loaded'] = 0
-    session['Guesses'] = []
     return redirect('/')
 
 
