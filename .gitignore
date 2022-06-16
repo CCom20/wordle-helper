@@ -9,6 +9,10 @@ __pycache__/
 # config file
 config.py
 
+# jupyter notebook
+jupyter-test-book.ipynb_checkpoints
+jupyter-test-book.ipynb
+
 # Distribution / packaging
 .Python
 build/
